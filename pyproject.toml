@@ -1,0 +1,13 @@
+[project]
+name = "dlai2526"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "matplotlib>=3.11.0",
+    "pillow>=12.2.0",
+    "torch>=2.12.1",
+    "torchvision>=0.27.1",
+]
