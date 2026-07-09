@@ -1,6 +1,8 @@
 # DLAI2526
 Project for DLAI course for a.y. 2025/26
 
+Custom dataset (museum, labeled botanical garden and botanical garden without labels and duplicates) are available at the following Drive [link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
+
 # Deep Learning Project: From Score Matching to Text-to-Image Latent Diffusion
 
 This repository contains the code for my deep learning project. The goal was to build diffusion models from scratch in PyTorch, starting from basic 2D point clouds and scaling up to a fully functional text-conditioned latent diffusion model trained on custom datasets.
