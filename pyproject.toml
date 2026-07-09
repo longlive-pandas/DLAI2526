@@ -5,13 +5,33 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "clip",
     "ipykernel>=7.3.0",
     "ipywidgets>=8.1.8",
+    "lpips>=0.1.4",
     "matplotlib>=3.11.0",
     "nbformat>=5.10.4",
+    "onnx>=1.22.0",
+    "onnxruntime-gpu>=1.27.0",
+    "opencv-python>=5.0.0.93",
     "pillow>=12.2.0",
     "plotly>=6.8.0",
-    "torch>=2.12.1",
-    "torchvision>=0.27.1",
+    "torch==2.6.0",
+    "torch-fidelity>=0.4.0",
+    "torchinfo>=1.8.0",
+    "torchmetrics>=1.9.0",
+    "torchsummary>=1.5.1",
+    "torchvision==0.21.0",
     "tqdm>=4.68.3",
+    "transformers>=5.12.1",
 ]
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+clip = { git = "https://github.com/openai/CLIP.git" }
