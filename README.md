@@ -1,7 +1,9 @@
 # DLAI2526
 Project for DLAI course for a.y. 2025/26
 
-Custom dataset (museum, labeled botanical garden and botanical garden without labels and duplicates) are available at the following Drive [link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
+Custom dataset (museum, labeled botanical garden and botanical garden without labels and duplicates) are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
+
+The main notebook is `main.ipynb`
 
 # Deep Learning Project: From Score Matching to Text-to-Image Latent Diffusion
 
