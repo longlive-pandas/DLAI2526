@@ -47,7 +47,7 @@ $$x^{(t)} = \sqrt{\bar{\alpha}_t}x^{(0)} + \sqrt{1 - \bar{\alpha}_t}\epsilon$$
 1. `GroupNorm` (8 groups) to stabilize the layers without relying on batch size.
 2. Exponential Moving Average (EMA) to keep the weights smooth.
 3. Deeper residual blocks with skip connections to increase the receptive field.
-
+![DDPM generated digits](imgs/mnist_gen_ddpm.png)
 
 
 ### 4. Latent Diffusion Models (LDM)
@@ -61,8 +61,16 @@ $$\mathcal{L}_{total} = \mathcal{L}_{L1} + \omega_{p} \mathcal{L}_{LPIPS} + \ome
 
 
 I used L1 to keep edges sharp, LPIPS (via a frozen VGG network) for perceptual quality, and KL divergence to regularize the space.
+
+![VAE Museum Reconstruction Check](imgs/vae_museum.png)
+> *VAE check: real (top) vs reconstructed (bottom).*
+
 * To prevent the diffusion model from collapsing, I calculated a scale factor $s = 1/\sigma_z$ to ensure the latents maintain a unit variance ($\sigma \approx 1$).
 * The diffusion model itself is a `LatentUNet` with self-attention, trained to predict velocity (v-prediction) under a cosine noise schedule.
+
+**Latent Denoising Process Over Time:**
+![Latent Diffusion Museum Denoising Step 1](imgs/latent_diff_museum.png)
+![Latent Diffusion Museum Denoising Step 2](imgs/latent_diff_museum2.png)
 
 ### 5. Multimodal Text-to-Image
 
@@ -75,6 +83,18 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right
 
 
 * To make the text prompts actually guide the image generation, I implemented Classifier-Free Guidance (CFG), randomly dropping the text captions 10% of the time during training.
+
+**Botanical Garden Dataset Results:**
+
+![Cactuses in a greenhouse](imgs/multimodal_botanical_closup_cactuses_in_a_greenhouse.png)
+![Some palmtrees](imgs/multimodal_bot_palmtrees.png)
+![A butterfly on a piece of fruit on a branch](imgs/multimodal_botanical_butterfly_on_fruit.png)
+
+**Classifier-Free Guidance (CFG) Tests:**
+
+![Test unconditional generation, CFG = 1.0](imgs/multimodal_flowers_unconditional.png)
+![Generate a pink-yellow dahlia](imgs/multimodal_flowers_yellow_white_dahlias.png)
+![Generate a sunflower](imgs/multimodal_flowers_sunflowers.png)
 
 ---
 
