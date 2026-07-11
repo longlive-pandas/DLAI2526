@@ -1,7 +1,7 @@
 # DLAI2526
 Project for DLAI course for a.y. 2025/26
 
-Custom dataset (museum, labeled botanical garden and botanical garden without labels and duplicates) and checkpoints are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
+Custom dataset for training (`museum.zip`, `labeled_botanical_orig.zip`) and checkpoints (for botanical dataset refer to "latest" directory) are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
 
 The main notebook is `main.ipynb`
 
