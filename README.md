@@ -136,6 +136,6 @@ Install the required dependencies:
 uv sync
 ```
 - First version: run main.ipynb
-- Second version: run plants_generation.py to generate flowers/plants, ffhq256_gen.py to generate human faces, ldm_museum.py to generate museum images.
+- Second version: run plants_generation.py to generate flowers/plants, ffhq256_gen.py to generate human faces; ldm_museum.ipynb has been run on colab to generate museum images.
 
 The script automatically detects what hardware you are running on and assigns the device accordingly (CUDA for NVIDIA, MPS for Apple Silicon, or CPU as a fallback). Just run the notebook sequentially.
