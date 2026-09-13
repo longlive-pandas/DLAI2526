@@ -4,6 +4,9 @@ Custom datasets:
 - botanical: https://drive.google.com/file/d/1m5FOquMbMmDILXZcUqlkPzrYUe8PY2Ft/view?usp=drivesdk
 - museum: https://drive.google.com/file/d/16xH6FvPqSVdJ4n3fiDK2Ib41FK4BMsNf/view?usp=drivesdk
 
+Latest trained models:
+- ffhq256: https://drive.google.com/file/d/13eDz2puG2WMQNkGLyk8Ve1NNvdz9Dcpu/view?usp=drivesdk
+- 
 
 ## Previous version 1
 Custom dataset for training (`museum.zip`, `labeled_botanical_orig.zip`) and checkpoints (for botanical dataset refer to "latest" directory) are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
