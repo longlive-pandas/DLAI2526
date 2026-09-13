@@ -10,6 +10,137 @@ Latest trained models:
 - flowers: https://drive.google.com/file/d/1nENxZQBFYhQvxRvTyc7CIBohoh19uUgE/view?usp=drivesdk
 - museum: https://drive.google.com/drive/folders/1KVrY1L8HSO4GaWHea_RB5fR1KPhqOczP
 
+## Execution Commands
+
+### 1. FFHQ 256 (DiT + Flow Matching v11)
+
+#### Caching
+Pre-compute VAE latent distributions with horizontal flip augmentation:
+```bash
+python train_ffhq256.py cache \
+  --data_dir path/to/ffhq256 \
+  --cache_dir ./latent_cache \
+  --resolution 256 \
+  --cache_moments \
+  --cache_flip \
+  --cache_batch_size 32 \
+  --num_workers 4
+```
+
+#### Training
+```bash
+# Standard training with periodic FID evaluation every 20k steps
+python train_ffhq256.py train \
+  --data_dir path/to/ffhq256 \
+  --cache_dir ./latent_cache \
+  --output_dir ./runs/ffhq_v11 \
+  --arch s \
+  --batch_size 128 \
+  --max_steps 250000 \
+  --lr 2e-4 \
+  --precision bf16 \
+  --fid_every_steps 20000
+
+# Fast training without in-line FID evaluation (does not require --data_dir)
+python train_ffhq256.py train \
+  --cache_dir ./latent_cache \
+  --output_dir ./runs/ffhq_v11 \
+  --arch s \
+  --batch_size 128 \
+  --max_steps 250000 \
+  --fid_every_steps 0
+
+# Automatic resume from the latest checkpoint
+python train_ffhq256.py train \
+  --data_dir path/to/ffhq256 \
+  --cache_dir ./latent_cache \
+  --output_dir ./runs/ffhq_v11 \
+  --resume auto
+```
+
+#### Sampling
+```bash
+# Generation with Heun ODE solver (25 steps) and EMA weights
+python train_ffhq256.py sample \
+  --checkpoint ./runs/ffhq_v11/checkpoints/best_fid.pt \
+  --output_dir ./runs/ffhq_v11 \
+  --num_samples 64 \
+  --gen_batch_size 16 \
+  --sample_steps 25 \
+  --solver heun
+
+# Generation with raw weights (without EMA)
+python train_ffhq256.py sample \
+  --checkpoint ./runs/ffhq_v11/checkpoints/latest.pt \
+  --output_dir ./runs/ffhq_v11 \
+  --use_raw_weights \
+  --num_samples 64
+```
+
+#### Evaluation (FID)
+* **In-training:** Automatically evaluated during training via `--fid_every_steps 20000` on 10k samples (`--fid_samples 10000`).
+* **Final evaluation:** Evaluated on 50k samples at the end of training via `--final_fid_samples 50000` (results logged to `metrics.jsonl`).
+
+---
+
+### 2. Flowers Multimodal (`flowers_t2i_rf.py`)
+
+#### Caching
+```powershell
+python flowers_t2i_rf.py cache `
+  --hf-dataset nelorth/oxford-flowers `
+  --cache-dir ./cache256 `
+  --image-size 256 `
+  --aug-variants 8 `
+  --repa
+```
+
+---
+
+### 3. Botanical (`v2_botanical_training_pt2.py`)
+
+#### Caching
+```bash
+# Phase 1
+python v2_botanical_training_pt2.py cache --phase 1
+
+# Phase 2
+python v2_botanical_training_pt2.py cache --phase 2
+```
+
+#### Training
+```bash
+# Phase 1 (Standard pre-training)
+python v2_botanical_training_pt2.py train --phase 1
+
+# Phase 1 (Pre-training with explicit parameters)
+python v2_botanical_training_pt2.py train --phase 1 --no-resume --batch 128 --steps 150000 --lr 3e-4
+
+# Phase 2 (Fine-tuning from Phase 1 weights)
+python v2_botanical_training_pt2.py train --phase 2 --init-from runs/phase1/best.pt --batch 128 --steps 50000 --lr 1.5e-4
+
+# Phase 2 (Training from scratch on custom dataset)
+python v2_botanical_training_pt2.py train --phase 2 --out-dir runs_scratch --batch 128 --steps 150000 --lr 3e-4
+```
+
+#### Sampling
+```bash
+# From fine-tuned model
+python v2_botanical_training_pt2.py sample --ckpt runs/phase2/best.pt --n 64 --steps 100
+
+# From scratch model
+python v2_botanical_training_pt2.py sample --ckpt runs_scratch/phase2/best.pt --n 64 --steps 100
+```
+
+#### Evaluation (FID)
+```bash
+# Fine-tuned model
+python v2_botanical_training_pt2.py fid --ckpt runs/phase2/best.pt --steps 50
+
+# From scratch model
+python v2_botanical_training_pt2.py fid --ckpt runs_scratch/phase2/best.pt --steps 50
+```
+
 
 ## Previous version 1
 Custom dataset for training (`museum.zip`, `labeled_botanical_orig.zip`) and checkpoints (for botanical dataset refer to "latest" directory) are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
