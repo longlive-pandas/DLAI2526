@@ -8,6 +8,8 @@ Latest trained models:
 - ffhq256: https://drive.google.com/file/d/13eDz2puG2WMQNkGLyk8Ve1NNvdz9Dcpu/view?usp=drivesdk
 - custom botanical: https://drive.google.com/file/d/1ARO3dIhiZxLE4UM3wB3S7EvozARXoybd/view?usp=drivesdk
 - flowers: https://drive.google.com/file/d/1nENxZQBFYhQvxRvTyc7CIBohoh19uUgE/view?usp=drivesdk
+- museum: https://drive.google.com/drive/folders/1KVrY1L8HSO4GaWHea_RB5fR1KPhqOczP
+
 
 ## Previous version 1
 Custom dataset for training (`museum.zip`, `labeled_botanical_orig.zip`) and checkpoints (for botanical dataset refer to "latest" directory) are available at the following [Drive link](https://drive.google.com/drive/folders/1qUfMhSXCMSaVScRn5XYYR59ec-ybXYyw?usp=sharing)
